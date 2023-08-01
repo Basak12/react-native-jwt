@@ -11,7 +11,6 @@ import {
 import {useAuth, API_URL} from "../../context/AuthContext";
 import axios from "axios";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Reanimated from "../../animations/Reanimated";
 import Animated, {FadeOutUp, FadeInUp} from "react-native-reanimated";
 
 const LoginScreen = ({navigation}: any) => {
@@ -34,6 +33,9 @@ const LoginScreen = ({navigation}: any) => {
     };
 
     return (
+        <Animated.View exiting={FadeOutUp}
+                       entering={FadeInUp}
+                       style={styles.container}>
         <ImageBackground source={require('../../../assets/splashScreen7.jpg')} resizeMode='cover' style = {{
             justifyContent: 'center',
             width: '100%',
@@ -45,10 +47,9 @@ const LoginScreen = ({navigation}: any) => {
                     keyboardShouldPersistTaps="handled"
                 >
                         <View style={styles.container}>
-                            <Animated.View style={styles.image} exiting={FadeOutUp}
-                                           entering={FadeInUp.duration(1000)}>
+
                                 <Image source={require('../../../assets/logo3.png')} style = {styles.image}/>
-                            </Animated.View>
+
                             <View style={styles.form}>
                                 <TextInput style={styles.input} placeholder="Email" onChangeText={(e: string) => setEmail(e)} value={email}/>
                                 <TextInput style={styles.input} placeholder="Password" onChangeText={(e: string) => setPassword(e)} value={password} secureTextEntry={true}/>
@@ -59,9 +60,11 @@ const LoginScreen = ({navigation}: any) => {
                             <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Register')}>
                                 <Text style = {{color: 'white',fontSize: 16, fontWeight: '800'}}>Create Account</Text>
                             </TouchableOpacity>
+
                         </View>
                 </KeyboardAwareScrollView>
         </ImageBackground>
+        </Animated.View>
     )
 };
 

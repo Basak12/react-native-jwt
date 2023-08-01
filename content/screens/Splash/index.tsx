@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import {View, Text, TouchableOpacity, Image, StyleSheet, TextInput, ImageBackground} from "react-native";
 import {useAuth, API_URL} from "../../context/AuthContext";
-import axios from "axios";
 import Animated, {FadeOutUp, FadeInUp} from "react-native-reanimated";
 const SplashScreen = ({navigation}: any) => {
     const { authState } = useAuth();

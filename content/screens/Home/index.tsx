@@ -11,69 +11,71 @@ import {
     ImageBackground,
     Button
 } from "react-native";
-import ScaleInView from "../../animations/ScaleInView";
-import Reanimated from "../../animations/Reanimated";
+import ImageSlider from "../../components/ImageSlider";
 
-const images = new Array(6).fill(
-    'https://plus.unsplash.com/premium_photo-1673266628904-131e706dda3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80\n',
-);
 const HomeScreen = () => {
-    const scrollX = useRef(new Animated.Value(0)).current // Initial value for opacity: 0
-    const {width: windowWidth} = Dimensions.get('window')
+    const americaImages = [
+        {
+            url: 'https://images.unsplash.com/photo-1521747116042-5a810fda9664?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            alt: 'San Francisco'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1485871981521-5b1fd3805eee?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            alt: 'New York'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1581351721010-8cf859cb14a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            alt: 'Las Vegas'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1609924211018-5526c55bad5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
+            alt: 'Los Angeles'
+        },
+    ]
+    const europeImages = [
+        {
+            url: 'https://images.unsplash.com/photo-1529655683826-aba9b3e77383?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80',
+            alt: 'London'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1173&q=80',
+            alt: 'Paris'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1096&q=80',
+            alt: 'Rome'
+        },
+        {
+            url: 'https://images.unsplash.com/photo-1545157000-85f257f7b040?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            alt: 'Venice'
+        }
+        ]
+    const asiaImages = [
+        {
+            url: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
+            alt: 'Philippines'
+        },
+        {
+            url:'https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            alt: 'Japan'
+        },
+        {
+            url:'https://images.unsplash.com/photo-1557093793-e196ae071479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            alt: 'Indonesia'
+        },
+        {
+            url:'https://images.unsplash.com/photo-1598935898639-81586f7d2129?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+            alt: 'Taiwan'
+        }
+        ]
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={styles.scrollContainer}>
-                <ScrollView
-                    horizontal={true}
-                    pagingEnabled
-                    showsHorizontalScrollIndicator={false}
-                    onScroll={Animated.event([
-                        {
-                            nativeEvent: {
-                                contentOffset: {
-                                    x: scrollX,
-                                },
-                            },
-                        },
-                    ])}
-                    scrollEventThrottle={1}>
-                    {images.map((image, imageIndex) => {
-                        return (
-                            <View style={{width: windowWidth, height: 250}} key={imageIndex}>
-                                <ImageBackground source={{uri: image}} style={styles.card}>
-                                    <ScaleInView>
-                                    <View style={styles.textContainer}>
-                                        <Text style={styles.infoText}>
-                                            {'Image - ' + imageIndex}
-                                        </Text>
-                                    </View>
-                                </ScaleInView>
-                                </ImageBackground>
-                            </View>
-                        );
-                    })}
-                </ScrollView>
-                <View style={styles.indicatorContainer}>
-                    {images.map((image, imageIndex) => {
-                        const width = scrollX.interpolate({
-                            inputRange: [
-                                windowWidth * (imageIndex - 1),
-                                windowWidth * imageIndex,
-                                windowWidth * (imageIndex + 1),
-                            ],
-                            outputRange: [8, 16, 8],
-                            extrapolate: 'clamp',
-                        });
-                        return (
-                            <Animated.View
-                                key={imageIndex}
-                                style={[styles.normalDot, {width}]}
-                            />
-                        );
-                    })}
-                </View>
-            </View>
+            <ScrollView>
+                <ImageSlider images={americaImages} title = 'America'/>
+                <ImageSlider images={europeImages} title = 'Europe'/>
+                <ImageSlider images={asiaImages} title = 'Asia'/>
+            </ScrollView>
         </SafeAreaView>
     )
 };
@@ -81,47 +83,9 @@ const HomeScreen = () => {
 export default HomeScreen;
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%',
         width: '100%'
-    },
-    scrollContainer: {
-        height: 300,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    card: {
-        flex: 1,
-        marginVertical: 4,
-        marginHorizontal: 16,
-        borderRadius: 5,
-        overflow: 'hidden',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    textContainer: {
-        backgroundColor: 'rgba(0,0,0, 0.7)',
-        paddingHorizontal: 24,
-        paddingVertical: 8,
-        borderRadius: 5,
-    },
-    infoText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
-    normalDot: {
-        height: 8,
-        width: 8,
-        borderRadius: 4,
-        backgroundColor: 'silver',
-        marginHorizontal: 4,
-    },
-    indicatorContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
 });

@@ -36,7 +36,7 @@ const Layout = () => {
                                 </TouchableOpacity>
                             ),
                             headerStyle: {
-                                backgroundColor: "#5e69ee",
+                                backgroundColor: "rgb(49,57,152)",
                             },
                             headerTintColor: "#fff",
                         }}
@@ -66,6 +66,6 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 10,
         borderRadius: 5,
-        backgroundColor: "rgba(10,29,255,0.3)",
+        backgroundColor: "rgba(94,105,238,0.3)",
     },
 });
