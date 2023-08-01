@@ -36,7 +36,7 @@ const LoginScreen = ({navigation}: any) => {
         <Animated.View exiting={FadeOutUp}
                        entering={FadeInUp}
                        style={styles.container}>
-        <ImageBackground source={require('../../../assets/splashScreen7.jpg')} resizeMode='cover' style = {{
+        <ImageBackground source={require('../../../assets/splashScreen4.jpeg')} resizeMode='cover' style = {{
             justifyContent: 'center',
             width: '100%',
             height: '100%'

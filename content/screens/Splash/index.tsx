@@ -28,7 +28,7 @@ const SplashScreen = ({navigation}: any) => {
             alignItems: 'center'
             }}
         >
-        <ImageBackground source={require('../../../assets/splashScreen7.jpg')} resizeMode='cover' style = {{
+        <ImageBackground source={require('../../../assets/splashScreen4.jpeg')} resizeMode='cover' style = {{
             width: '100%',
             height: '100%'
         }}/>

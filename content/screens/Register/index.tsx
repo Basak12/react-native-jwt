@@ -26,7 +26,7 @@ const RegisterScreen = () => {
     };
 
     return (
-        <ImageBackground source={require('../../../assets/splashScreen6.png')} resizeMode='cover' style={ {
+        <ImageBackground source={require('../../../assets/splashScreen4.jpeg')} resizeMode='cover' style={ {
             flex: 1,
             justifyContent: 'center',
             width: '100%',

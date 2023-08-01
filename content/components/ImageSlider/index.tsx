@@ -100,9 +100,7 @@ const styles = StyleSheet.create({
         marginVertical: 4,
         marginHorizontal: 16,
         borderRadius: 5,
-        overflow: 'hidden'
-
-        ,
+        overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
     },
