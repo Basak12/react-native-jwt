@@ -1,5 +1,3 @@
-// App.js
-
 import React from "react";
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -8,6 +6,7 @@ import { AuthProvider, useAuth } from "./content/context/AuthContext";
 import HomeScreen from "./content/screens/Home";
 import LoginScreen from "./content/screens/Login";
 import SplashScreen from "./content/screens/Splash";
+import RegisterScreen from "./content/screens/Register";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +50,11 @@ const Layout = () => {
                         <Stack.Screen
                             name="Login"
                             component={LoginScreen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="Register"
+                            component={RegisterScreen}
                             options={{ headerShown: false }}
                         />
                     </>
