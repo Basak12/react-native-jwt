@@ -31,12 +31,11 @@ const LoginScreen = ({navigation}: any) => {
             alert(result.msg);
         }
     };
-
     return (
         <Animated.View exiting={FadeOutUp}
                        entering={FadeInUp}
                        style={styles.container}>
-        <ImageBackground source={require('../../../assets/splashScreen4.jpeg')} resizeMode='cover' style = {{
+        <ImageBackground source={require('../../../assets/splashScreen2.jpeg')} resizeMode='cover' style = {{
             justifyContent: 'center',
             width: '100%',
             height: '100%'
@@ -47,9 +46,7 @@ const LoginScreen = ({navigation}: any) => {
                     keyboardShouldPersistTaps="handled"
                 >
                         <View style={styles.container}>
-
                                 <Image source={require('../../../assets/logo3.png')} style = {styles.image}/>
-
                             <View style={styles.form}>
                                 <TextInput style={styles.input} placeholder="Email" onChangeText={(e: string) => setEmail(e)} value={email}/>
                                 <TextInput style={styles.input} placeholder="Password" onChangeText={(e: string) => setPassword(e)} value={password} secureTextEntry={true}/>
@@ -78,6 +75,7 @@ const styles = StyleSheet.create({
     image: {
         width: 120,
         height: 100,
+        marginBottom: 20,
     },
     input: {
         height: 44,
@@ -94,7 +92,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     button: {
-        backgroundColor: 'rgba(0,0,0,0.6)',
+        backgroundColor: 'rgba(0,0,0,0.7)',
         padding: 10,
         borderRadius: 10,
         width: '70%',

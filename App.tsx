@@ -55,7 +55,12 @@ const Layout = () => {
                         <Stack.Screen
                             name="Register"
                             component={RegisterScreen}
-                            options={{ headerShown: false }}
+                            options={{
+                                headerStyle: {
+                                    backgroundColor: "#0D0920",
+                                },
+                                headerTintColor: "#fff",
+                            }}
                         />
                     </>
                 )}
