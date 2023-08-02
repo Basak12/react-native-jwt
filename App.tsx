@@ -7,6 +7,8 @@ import HomeScreen from "./content/screens/Home";
 import LoginScreen from "./content/screens/Login";
 import SplashScreen from "./content/screens/Splash";
 import RegisterScreen from "./content/screens/Register";
+import SingleCityScreen from "./content/screens/SingleCity";
+import createStackNavigator from "react-native-screens/createNativeStackNavigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,7 +22,6 @@ export default function App() {
 
 const Layout = () => {
     const { authState, onLogout } = useAuth();
-
     return (
         <NavigationContainer>
             <Stack.Navigator>
@@ -50,6 +51,11 @@ const Layout = () => {
                         <Stack.Screen
                             name="Login"
                             component={LoginScreen}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="SingleCity"
+                            component={SingleCityScreen}
                             options={{ headerShown: false }}
                         />
                         <Stack.Screen

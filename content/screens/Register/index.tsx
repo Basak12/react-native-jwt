@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import {View, Text, TouchableOpacity, Image, StyleSheet, TextInput, ImageBackground} from "react-native";
 import {useAuth, API_URL} from "../../context/AuthContext";
 import Animated, {FadeOutUp, FadeInUp} from "react-native-reanimated";
+import axios from "axios";
 const RegisterScreen = () => {
 
     const[email, setEmail] = useState<string>('');

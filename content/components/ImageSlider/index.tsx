@@ -14,12 +14,13 @@ import {
 
 interface Images {
     url: string,
-    alt: string
+    name: string
 }
 
-const ImageSlider = ({title, images}: {title?: string, images:Images[]} ) => {
+const ImageSlider = ({title, images, navigation}: {title?: string, images:Images[], navigation: any} ) => {
     const scrollX = useRef(new Animated.Value(0)).current // Initial value for opacity: 0
     const {width: windowWidth} = Dimensions.get('window')
+    console.log(navigation)
 
     return(
        <SafeAreaView style={styles.container}>
@@ -42,13 +43,21 @@ const ImageSlider = ({title, images}: {title?: string, images:Images[]} ) => {
                    {images.map((image, imageIndex) => {
                        return (
                            <View style={{width: windowWidth, height: 250}} key={imageIndex}>
-                               <ImageBackground source={{uri: image.url}} style={styles.card}>
-                                   <View style={styles.textContainer}>
-                                       <Text style={styles.infoText}>
-                                           {image.alt}
-                                       </Text>
-                                   </View>
-                               </ImageBackground>
+                               <TouchableOpacity
+                                   style={{ width: windowWidth, height: 250 }}
+                                   onPress={() => {
+                                       console.log("Navigating to SingleCity with name:", image.name);
+                                       navigation.navigate("SingleCity", { name: image.name });
+                                   }}
+                               >
+                                   <ImageBackground source={{uri: image.url}} style={styles.card}>
+                                       <View style={styles.textContainer}>
+                                           <Text style={styles.infoText}>
+                                               {image.name}
+                                           </Text>
+                                       </View>
+                                   </ImageBackground>
+                               </TouchableOpacity>
                            </View>
                        );
                    })}
