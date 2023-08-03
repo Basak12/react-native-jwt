@@ -9,21 +9,13 @@ import {
     ImageBackground,
 } from "react-native";
 import {useAuth, API_URL} from "../../context/AuthContext";
-import axios from "axios";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Animated, {FadeOutUp, FadeInUp} from "react-native-reanimated";
 
 const LoginScreen = ({navigation}: any) => {
-    const[email, setEmail] = useState<string>('');
-    const[password, setPassword] = useState<string>('');
+    const[email, setEmail] = useState<string>('mail');
+    const[password, setPassword] = useState<string>('asd');
     const {onLogin, onRegister} = useAuth();
-
-    useEffect(() => {
-        const testCall = async () => {
-            const result = await axios.get(`${API_URL}/users`);
-        };
-        testCall();
-    }, []);
 
     const handleLogin = async () => {
         const result = await onLogin!(email, password); // ! mark means that we are sure that this value is not null
@@ -31,9 +23,31 @@ const LoginScreen = ({navigation}: any) => {
             alert(result.msg);
         }
     };
+
+    const SplashView = () => {
+        return(
+            <Animated.View
+                exiting={FadeOutUp}
+                entering={FadeInUp}
+                style = {{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+            >
+                <ImageBackground source={require('../../../assets/splashScreen2.jpeg')} resizeMode='cover' style = {{
+                    width: '100%',
+                    height: '100%'
+                }}/>
+            </Animated.View>
+        )
+    }
+
     return (
+        <>
+        {SplashView}
         <Animated.View exiting={FadeOutUp}
-                       entering={FadeInUp}
+                       entering={FadeInUp.duration(1000)}
                        style={styles.container}>
         <ImageBackground source={require('../../../assets/splashScreen2.jpeg')} resizeMode='cover' style = {{
             justifyContent: 'center',
@@ -62,6 +76,7 @@ const LoginScreen = ({navigation}: any) => {
                 </KeyboardAwareScrollView>
         </ImageBackground>
         </Animated.View>
+        </>
     )
 };
 

@@ -12,8 +12,12 @@ import {
     Button
 } from "react-native";
 import ImageSlider from "../../components/ImageSlider";
+import {useNavigation} from "@react-navigation/native";
+
 
 const HomeScreen = ({navigation}: {navigation: any}) => {
+    //const {navigation} = useNavigation();
+
     const americaImages = [
         {
             url: 'https://images.unsplash.com/photo-1521747116042-5a810fda9664?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
@@ -71,6 +75,7 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
 
     return (
         <SafeAreaView style={styles.container}>
+            <Button title={ 'Go to single'} onPress={() => navigation.navigate('Test')}/>
             <ScrollView>
                 <ImageSlider navigation={navigation} images={americaImages} title = 'America'/>
                 <ImageSlider navigation={navigation} images={europeImages} title = 'Europe'/>

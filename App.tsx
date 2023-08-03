@@ -1,30 +1,30 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
-import { AuthProvider, useAuth } from "./content/context/AuthContext";
+import {StyleSheet, TouchableOpacity, Text} from "react-native";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {NavigationContainer} from "@react-navigation/native";
+import {AuthProvider, useAuth} from "./content/context/AuthContext";
 import HomeScreen from "./content/screens/Home";
 import LoginScreen from "./content/screens/Login";
 import SplashScreen from "./content/screens/Splash";
 import RegisterScreen from "./content/screens/Register";
 import SingleCityScreen from "./content/screens/SingleCity";
-import createStackNavigator from "react-native-screens/createNativeStackNavigator";
+import TestScreen from "./content/screens/Test";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
     return (
         <AuthProvider>
-            <Layout />
+            <Layout/>
         </AuthProvider>
     );
 }
 
 const Layout = () => {
-    const { authState, onLogout } = useAuth();
+    const {authState, onLogout} = useAuth();
     return (
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName={authState?.authenticated ? 'Home' : 'Login'}>
                 {authState?.authenticated ? (
                     <Stack.Screen
                         name="Home"
@@ -32,7 +32,7 @@ const Layout = () => {
                         options={{
                             headerRight: () => (
                                 <TouchableOpacity onPress={onLogout} style={styles.logout}>
-                                    <Text style={{ color: "#fff" }}>Logout</Text>
+                                    <Text style={{color: "#fff"}}>Logout</Text>
                                 </TouchableOpacity>
                             ),
                             headerStyle: {
@@ -44,32 +44,32 @@ const Layout = () => {
                 ) : (
                     <>
                         <Stack.Screen
-                            name="Splash"
-                            component={SplashScreen}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
                             name="Login"
                             component={LoginScreen}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                            name="SingleCity"
-                            component={SingleCityScreen}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                            name="Register"
-                            component={RegisterScreen}
-                            options={{
-                                headerStyle: {
-                                    backgroundColor: "#0D0920",
-                                },
-                                headerTintColor: "#fff",
-                            }}
+                            options={{headerShown: false}}
                         />
                     </>
                 )}
+                <Stack.Screen
+                    name="Test"
+                    component={TestScreen}
+                />
+
+                <Stack.Screen
+                    name="SingleCity"
+                    component={SingleCityScreen}
+                    options={{headerShown: false}}
+                />
+                <Stack.Screen
+                    name="Register"
+                    component={RegisterScreen}
+                    options={{
+                        headerStyle: {
+                            backgroundColor: "#0D0920",
+                        },
+                        headerTintColor: "#fff",
+                    }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );

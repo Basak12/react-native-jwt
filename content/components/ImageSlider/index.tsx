@@ -11,6 +11,7 @@ import {
     ImageBackground,
     Button
 } from "react-native";
+import Login from "../../screens/Login";
 
 interface Images {
     url: string,
@@ -20,7 +21,6 @@ interface Images {
 const ImageSlider = ({title, images, navigation}: {title?: string, images:Images[], navigation: any} ) => {
     const scrollX = useRef(new Animated.Value(0)).current // Initial value for opacity: 0
     const {width: windowWidth} = Dimensions.get('window')
-    console.log(navigation)
 
     return(
        <SafeAreaView style={styles.container}>
@@ -47,7 +47,7 @@ const ImageSlider = ({title, images, navigation}: {title?: string, images:Images
                                    style={{ width: windowWidth, height: 250 }}
                                    onPress={() => {
                                        console.log("Navigating to SingleCity with name:", image.name);
-                                       navigation.navigate("SingleCity", { name: image.name });
+                                       navigation.navigate("SingleCity");
                                    }}
                                >
                                    <ImageBackground source={{uri: image.url}} style={styles.card}>
