@@ -5,10 +5,8 @@ import {NavigationContainer} from "@react-navigation/native";
 import {AuthProvider, useAuth} from "./content/context/AuthContext";
 import HomeScreen from "./content/screens/Home";
 import LoginScreen from "./content/screens/Login";
-import SplashScreen from "./content/screens/Splash";
 import RegisterScreen from "./content/screens/Register";
 import SingleCityScreen from "./content/screens/SingleCity";
-import TestScreen from "./content/screens/Test";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,14 +49,16 @@ const Layout = () => {
                     </>
                 )}
                 <Stack.Screen
-                    name="Test"
-                    component={TestScreen}
-                />
-
-                <Stack.Screen
                     name="SingleCity"
                     component={SingleCityScreen}
-                    options={{headerShown: false}}
+                    initialParams={{name: null}}
+                    options={{
+                        headerStyle: {
+                            backgroundColor: "rgb(49,57,152)",
+                        },
+                        headerTintColor: "#fff",
+                        headerTitle: "City",
+                    }}
                 />
                 <Stack.Screen
                     name="Register"

@@ -75,7 +75,6 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Button title={ 'Go to single'} onPress={() => navigation.navigate('Test')}/>
             <ScrollView>
                 <ImageSlider navigation={navigation} images={americaImages} title = 'America'/>
                 <ImageSlider navigation={navigation} images={europeImages} title = 'Europe'/>
