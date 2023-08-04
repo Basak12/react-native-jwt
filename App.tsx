@@ -7,6 +7,7 @@ import HomeScreen from "./content/screens/Home";
 import LoginScreen from "./content/screens/Login";
 import RegisterScreen from "./content/screens/Register";
 import SingleCityScreen from "./content/screens/SingleCity";
+import Test from "./content/screens/Test";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,13 +52,23 @@ const Layout = () => {
                 <Stack.Screen
                     name="SingleCity"
                     component={SingleCityScreen}
-                    initialParams={{name: null}}
                     options={{
                         headerStyle: {
                             backgroundColor: "rgb(49,57,152)",
                         },
                         headerTintColor: "#fff",
                         headerTitle: "City",
+                    }}
+                />
+                <Stack.Screen
+                    name="Test"
+                    component={Test}
+                    options={{
+                        headerStyle: {
+                            backgroundColor: "rgb(49,57,152)",
+                        },
+                        headerTintColor: "#fff",
+                        headerTitle: "Test",
                     }}
                 />
                 <Stack.Screen

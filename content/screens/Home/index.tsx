@@ -57,19 +57,19 @@ const HomeScreen = ({navigation}: {navigation: any}) => {
     const asiaImages = [
         {
             url: 'https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80',
-            name: 'Philippines'
+            name: 'Manila'
         },
         {
             url:'https://images.unsplash.com/photo-1542051841857-5f90071e7989?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-            name: 'Japan'
+            name: 'Tokyo'
         },
         {
             url:'https://images.unsplash.com/photo-1557093793-e196ae071479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-            name: 'Indonesia'
+            name: 'Jakarta'
         },
         {
             url:'https://images.unsplash.com/photo-1598935898639-81586f7d2129?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-            name: 'Taiwan'
+            name: 'Taipei'
         }
         ]
 

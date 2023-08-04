@@ -11,7 +11,6 @@ import {
     ImageBackground,
     Button
 } from "react-native";
-import Login from "../../screens/Login";
 
 interface Images {
     url: string,
@@ -46,12 +45,8 @@ const ImageSlider = ({title, images, navigation}: {title?: string, images:Images
                                <TouchableOpacity
                                    style={{ width: windowWidth, height: 250 }}
                                    onPress={() => {
-                                       if (image.name) {
                                            console.log("Navigating to SingleCity with name:", image.name);
                                            navigation.navigate('SingleCity', { name: image.name });
-                                       } else {
-                                           console.error("Image name is undefined or empty.");
-                                       }
                                    }}
                                >
                                    <ImageBackground source={{uri: image.url}} style={styles.card}>
@@ -141,3 +136,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+
+
+
+
+
+
+
+
+
+
+
