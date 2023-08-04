@@ -57,10 +57,6 @@ const ImageSlider = ({
                 <TouchableOpacity
                   style={{ width: windowWidth, height: 250 }}
                   onPress={() => {
-                    console.log(
-                      'Navigating to SingleCity with name:',
-                      image.name,
-                    );
                     navigation.navigate('SingleCity', {
                       name: image.name,
                       url: image.url,
