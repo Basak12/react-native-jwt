@@ -28,7 +28,15 @@ const SingleCityScreen: React.FC<SingleCityProps> = ({ route }) => {
   const apiKey = 'vJGCI8jAmBuS3klC4VA3AQ==5c9BrfkBlbztM9hG';
   const [cityData, setCityData] = useState<cityData[]>([]);
   const { name, url } = route.params;
-  console.log('SingleCityScreen name:', name);
+
+  const formatNumber = (num: number) => {
+    if (num >= 1000000) {
+      return (num / 1000000).toFixed(1) + ' M';
+    } else if (num >= 1000) {
+      return (num / 1000).toFixed(1) + ' K';
+    }
+    return num.toString();
+  };
 
   useEffect(() => {
     axios
@@ -41,49 +49,71 @@ const SingleCityScreen: React.FC<SingleCityProps> = ({ route }) => {
         setCityData(response.data);
       })
       .catch((error) => {
-        console.error('Request failed:', error);
+        console.error('Request failed in single city component:', error);
       });
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {cityData.map((city) => {
         return (
           <SafeAreaView style={styles.textContainer} key={city.name}>
-            <View style={{ alignSelf: 'center', marginBottom: 20 }}>
-              <Text style={{ fontSize: 20 }}>{name}</Text>
+            <View
+              style={{ alignSelf: 'center', marginBottom: 20, marginTop: 20 }}
+            >
+              <Text style={{ fontSize: 22, fontWeight: 'bold' }}>
+                {city.name}
+              </Text>
             </View>
             <View style={styles.infoContainer}>
-              <Text style={{ fontSize: 16 }}>Country:</Text>
-              <Text style={{ fontSize: 18 }}>{city.country}</Text>
+              <Text style={{ fontSize: 16, color: '#686b6c' }}>Country:</Text>
+              <Text style={{ fontSize: 18, fontWeight: '500' }}>
+                {city.country}
+              </Text>
             </View>
             <View style={styles.infoContainer}>
-              <Text style={{ fontSize: 16 }}>Lat:</Text>
-              <Text style={{ fontSize: 18 }}>{city.latitude.toString()}</Text>
+              <Text style={{ fontSize: 16, color: '#686b6c' }}>Lat:</Text>
+              <Text style={{ fontSize: 18, fontWeight: '500' }}>
+                {city.latitude}
+              </Text>
             </View>
             <View style={styles.infoContainer}>
-              <Text style={{ fontSize: 16 }}>Long:</Text>
-              <Text style={{ fontSize: 18 }}>{city.longitude.toString()}</Text>
+              <Text style={{ fontSize: 16, color: '#686b6c' }}>Long:</Text>
+              <Text style={{ fontSize: 18, fontWeight: '500' }}>
+                {city.longitude}
+              </Text>
             </View>
             <View style={styles.infoContainer}>
-              <Text style={{ fontSize: 16 }}>Population:</Text>
-              <Text style={{ fontSize: 18 }}>{city.population.toString()}</Text>
+              <Text style={{ fontSize: 16, color: '#686b6c' }}>
+                Population:
+              </Text>
+              <Text style={{ fontSize: 18, fontWeight: '500' }}>
+                {formatNumber(city.population)}
+              </Text>
+            </View>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: 15,
+              }}
+            >
+              <Image
+                source={{ uri: url }}
+                resizeMode="cover"
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  width: 300,
+                  height: 380,
+                  borderRadius: 8,
+                }}
+              />
             </View>
           </SafeAreaView>
         );
       })}
-      <Image
-        source={{ uri: url }}
-        resizeMode="cover"
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: 300,
-          height: 400,
-          borderRadius: 8,
-        }}
-      />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -94,23 +124,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-    margin: 16,
-    borderRadius: 8,
-    borderStyle: 'solid',
-    borderColor: 'rgba(2,38,79,0.6)',
-    borderWidth: 1,
-    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.5)',
+    //backgroundColor: 'rgba(255,255,255,0.9)',
   },
   textContainer: {
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 20,
-    padding: 16,
     borderRadius: 8,
-    width: 300,
+    padding: 20,
+    width: 350,
+    height: 650,
+    borderStyle: 'solid',
+    borderWidth: 1.5,
+    borderColor: 'rgba(2,38,79,0.6)',
   },
   infoContainer: {
     borderBottomColor: 'rgba(2,38,79,0.3)',
     borderBottomWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
