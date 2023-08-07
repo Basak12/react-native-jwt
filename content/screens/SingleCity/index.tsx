@@ -38,6 +38,27 @@ const SingleCityScreen: React.FC<SingleCityProps> = ({ route }) => {
     return num.toString();
   };
 
+  const convertToCountryName = (country: string) => {
+    if (country === 'US') {
+      return 'United States';
+    } else if (country === 'GB') {
+      return 'United Kingdom';
+    } else if (country === 'FR') {
+      return 'France';
+    } else if (country === 'IT') {
+      return 'Italy';
+    } else if (country === 'PH') {
+      return 'Philippines';
+    } else if (country === 'JP') {
+      return 'Japan';
+    } else if (country === 'ID') {
+      return 'Indonesia';
+    } else if (country === 'TW') {
+      return 'Taiwan';
+    }
+    return country;
+  };
+
   useEffect(() => {
     axios
       .get(`https://api.api-ninjas.com/v1/city?name=${name}`, {
@@ -68,7 +89,7 @@ const SingleCityScreen: React.FC<SingleCityProps> = ({ route }) => {
             <View style={styles.infoContainer}>
               <Text style={{ fontSize: 16, color: '#686b6c' }}>Country:</Text>
               <Text style={{ fontSize: 18, fontWeight: '500' }}>
-                {city.country}
+                {convertToCountryName(city.country)}
               </Text>
             </View>
             <View style={styles.infoContainer}>
