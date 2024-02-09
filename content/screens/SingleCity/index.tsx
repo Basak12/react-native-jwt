@@ -9,7 +9,6 @@ import {
   SafeAreaView,
 } from 'react-native';
 import axios from 'axios';
-import { useRoute } from '@react-navigation/native';
 
 interface cityData {
   name: string;

@@ -8,9 +8,13 @@
 #import <React/RCTViewComponentView.h>
 #else
 #import <React/RCTView.h>
-#endif
+#endif // RCT_NEW_ARCH_ENABLED
 
 NS_ASSUME_NONNULL_BEGIN
+
+#ifdef RCT_NEW_ARCH_ENABLED
+namespace react = facebook::react;
+#endif // RCT_NEW_ARCH_ENABLED
 
 @interface RCTConvert (RNSScreen)
 
@@ -31,6 +35,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithView:(UIView *)view;
 - (UIViewController *)findChildVCForConfigAndTrait:(RNSWindowTrait)trait includingModals:(BOOL)includingModals;
+- (BOOL)hasNestedStack;
+- (void)calculateAndNotifyHeaderHeightChangeIsModal:(BOOL)isModal;
 - (void)notifyFinishTransitioning;
 - (RNSScreenView *)screenView;
 #ifdef RCT_NEW_ARCH_ENABLED
@@ -88,14 +94,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 #ifdef RCT_NEW_ARCH_ENABLED
 // we recreate the behavior of `reactSetFrame` on new architecture
-@property (nonatomic) facebook::react::LayoutMetrics oldLayoutMetrics;
-@property (nonatomic) facebook::react::LayoutMetrics newLayoutMetrics;
+@property (nonatomic) react::LayoutMetrics oldLayoutMetrics;
+@property (nonatomic) react::LayoutMetrics newLayoutMetrics;
 @property (weak, nonatomic) RNSScreenStackHeaderConfig *config;
 @property (nonatomic, readonly) BOOL hasHeaderConfig;
 #else
 @property (nonatomic, copy) RCTDirectEventBlock onAppear;
 @property (nonatomic, copy) RCTDirectEventBlock onDisappear;
 @property (nonatomic, copy) RCTDirectEventBlock onDismissed;
+@property (nonatomic, copy) RCTDirectEventBlock onHeaderHeightChange;
 @property (nonatomic, copy) RCTDirectEventBlock onWillAppear;
 @property (nonatomic, copy) RCTDirectEventBlock onWillDisappear;
 @property (nonatomic, copy) RCTDirectEventBlock onNativeDismissCancelled;
@@ -104,6 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
 #endif // RCT_NEW_ARCH_ENABLED
 
 - (void)notifyFinishTransitioning;
+- (void)notifyHeaderHeightChange:(double)height;
 
 #ifdef RCT_NEW_ARCH_ENABLED
 - (void)notifyWillAppear;
@@ -118,6 +126,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)notifyTransitionProgress:(double)progress closing:(BOOL)closing goingForward:(BOOL)goingForward;
 - (void)notifyDismissCancelledWithDismissCount:(int)dismissCount;
 - (BOOL)isModal;
+- (BOOL)isPresentedAsNativeModal;
 
 /// Looks for header configuration in instance's `reactSubviews` and returns it. If not present returns `nil`.
 - (RNSScreenStackHeaderConfig *_Nullable)findHeaderConfig;
